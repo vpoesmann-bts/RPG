@@ -21,7 +21,7 @@ public class Warrior {
     protected static final int LVL1_MAG_STAT = 2;
     protected static final int LVL1_MDF_STAT = 2;
 
-    protected static final int[] tab = {10, 20, 35, 60, 90, 140, 200, 280, 400, 550};
+    protected static final int BASE_LVL_UP_EXP = 80;
     protected static final int[] statsLevelUpMin = {8, 1, 2, 2, 0, 0};
     protected static final int[] statsLevelUpMax = {12, 2, 4, 4, 1, 1};
 
@@ -65,7 +65,7 @@ public class Warrior {
         this.level = 1;
         this.exp = 0;
 
-        this.gainExp(200);
+        this.gainExp(2000000);
     }
 
     public int nombreAleatoire(int min, int max) {
@@ -73,12 +73,16 @@ public class Warrior {
         return r.nextInt((max + 1) - min) + min;
     }
 
+    public int getExpToNextLevel() {
+        return (int) (BASE_LVL_UP_EXP * Math.pow(1.1, level));
+    }
+
     public void gainExp(int amount) {
         exp += amount;
-        while (exp > tab[level]) {
-            exp -= tab[level];
+        while (exp > getExpToNextLevel()) {
+            exp -= getExpToNextLevel();
             levelUp();
-            System.out.println(toString());
+            System.out.println(getExpToNextLevel());
         }
     }
 
