@@ -5,32 +5,100 @@
  */
 package com.vpoesmann.rpg;
 
+import java.util.Random;
+
 /**
  *
  * @author sogeking
  */
 public class Warrior {
 
+    protected static final int LVL1_MAX_HP = 100;
+    protected static final int LVL1_MAX_MANA = 20;
+
+    protected static final int LVL1_ATK_STAT = 5;
+    protected static final int LVL1_DEF_STAT = 5;
+    protected static final int LVL1_MAG_STAT = 2;
+    protected static final int LVL1_MDF_STAT = 2;
+
+    protected static final int[] tab = {10, 20, 35, 60, 90, 140, 200, 280, 400, 550};
+    protected static final int[] statsLevelUpMin = {8, 1, 2, 2, 0, 0};
+    protected static final int[] statsLevelUpMax = {12, 2, 4, 4, 1, 1};
+
     protected String name;
 
+    protected int exp;
+    protected int level;
+
     protected int maxHPStat;
+    protected int maxManaStat;
+
     protected int attackStat;
     protected int defenseStat;
 
+    protected int magicStat;
+    protected int magicDefStat;
+
     protected int currentHP;
+    protected int currentMana;
+
     protected boolean isAlive;
 
     protected boolean isGuarding;
 
-    public Warrior(String p_name, int p_maxHPStat, int p_attackStat, int p_defenseStat) {
+    public Warrior(String p_name) {
         this.name = p_name;
 
-        this.maxHPStat = p_maxHPStat;
+        this.maxHPStat = LVL1_MAX_HP;
         this.currentHP = this.maxHPStat;
-        this.attackStat = p_attackStat;
-        this.defenseStat = p_defenseStat;
+
+        this.maxManaStat = LVL1_MAX_MANA;
+        this.currentMana = this.maxManaStat;
+
+        this.attackStat = LVL1_ATK_STAT;
+        this.defenseStat = LVL1_DEF_STAT;
+        this.magicStat = LVL1_MAG_STAT;
+        this.magicDefStat = LVL1_MDF_STAT;
+
         this.isAlive = true;
 
+        this.level = 1;
+        this.exp = 0;
+
+        this.gainExp(200);
+    }
+
+    public int nombreAleatoire(int min, int max) {
+        Random r = new Random();
+        return r.nextInt((max + 1) - min) + min;
+    }
+
+    public void gainExp(int amount) {
+        exp += amount;
+        while (exp > tab[level]) {
+            exp -= tab[level];
+            levelUp();
+            System.out.println(toString());
+        }
+    }
+
+    public void levelUp() {
+        level++;
+        int hpGain = nombreAleatoire(statsLevelUpMin[0], statsLevelUpMax[0]);
+        int mpGain = nombreAleatoire(statsLevelUpMin[1], statsLevelUpMax[1]);
+        maxHPStat += hpGain;
+        maxManaStat += mpGain;
+        attackStat += nombreAleatoire(statsLevelUpMin[2], statsLevelUpMax[2]);
+        defenseStat += nombreAleatoire(statsLevelUpMin[3], statsLevelUpMax[3]);
+        magicStat += nombreAleatoire(statsLevelUpMin[4], statsLevelUpMax[4]);
+        magicDefStat += nombreAleatoire(statsLevelUpMin[5], statsLevelUpMax[5]);
+
+        currentHP += hpGain;
+        currentMana += mpGain;
+    }
+
+    public int getLevel() {
+        return level;
     }
 
     public String getName() {
@@ -41,6 +109,10 @@ public class Warrior {
         return maxHPStat;
     }
 
+    public int getMaxManaStat() {
+        return maxManaStat;
+    }
+
     public int getAttackStat() {
         return attackStat;
     }
@@ -49,14 +121,26 @@ public class Warrior {
         return defenseStat;
     }
 
+    public int getMagicStat() {
+        return magicStat;
+    }
+
+    public int getMagicDefenseStat() {
+        return magicDefStat;
+    }
+
     public int getCurrentHP() {
         return currentHP;
+    }
+
+    public int getCurrentMana() {
+        return currentMana;
     }
 
     public boolean isAlive() {
         return isAlive;
     }
-    
+
     public boolean isGuarding() {
         return isGuarding;
     }
@@ -84,8 +168,11 @@ public class Warrior {
     public String toString() {
         String result = getClassName() + " " + name + " => ";
         result += "HP : " + currentHP + "/" + maxHPStat + " | ";
+        result += "MP : " + currentMana + "/" + maxManaStat + " | ";
         result += "ATK : " + attackStat + " | ";
         result += "DEF : " + defenseStat + " | ";
+        result += "MAG : " + magicStat + " | ";
+        result += "MDF : " + magicDefStat + " | ";
 
         return result;
     }

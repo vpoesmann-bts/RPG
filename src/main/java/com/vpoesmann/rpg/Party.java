@@ -20,14 +20,14 @@ public class Party {
         
         switch (formation) {
             case 0:
-                characters.add(new Warrior("Wigfried", 70, 10, 10));
-                characters.add(new Warrior("Gonzague", 80, 8, 12));
-                characters.add(new Warrior("Enguerrand", 50, 15, 15));
-                characters.add(new Warrior("Norbert", 100, 5, 13));
+                characters.add(new Warrior("Wigfried"));
+                characters.add(new Warrior("Gonzague"));
+                characters.add(new Warrior("Enguerrand"));
+                characters.add(new Warrior("Norbert"));
                 break;
             case 1:
-                characters.add(new Warrior("Jean-Bâtard", 50, 10, 10));
-                characters.add(new Warrior("Jean-Craqué", 200, 200, 15));
+                characters.add(new Warrior("Jean-Bâtard"));
+                characters.add(new Warrior("Jean-Craqué"));
                 break;
         }
     }
@@ -58,7 +58,7 @@ public class Party {
         return getAliveCharacters().size();
     }
 
-    boolean areAllDead() {
+    public boolean areAllDead() {
         return getAliveCharactersSize() == 0;
     }
 }
