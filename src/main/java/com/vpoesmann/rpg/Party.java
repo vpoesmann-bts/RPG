@@ -13,7 +13,7 @@ import java.util.List;
  * @author sogeking
  */
 public class Party {
-    protected List<Warrior> characters;
+    protected List<Character> characters;
     
     public Party(int formation) {
         characters = new ArrayList();
@@ -32,21 +32,21 @@ public class Party {
         }
     }
     
-    public List<Warrior> getCharacters() {
+    public List<Character> getCharacters() {
         return characters;
     }
     
-    public Warrior getCharacter(int index) {
+    public Character getCharacter(int index) {
         return characters.get(index);
     }
     
-    public Warrior getAliveCharacter(int index) {
+    public Character getAliveCharacter(int index) {
         return getAliveCharacters().get(index);        
     }
     
-    public List<Warrior> getAliveCharacters() {
-        List<Warrior> aliveCharacters = new ArrayList();
-        for (Warrior character : characters) {
+    public List<Character> getAliveCharacters() {
+        List<Character> aliveCharacters = new ArrayList();
+        for (Character character : characters) {
             if (character.isAlive()) {
                 aliveCharacters.add(character);
             }
