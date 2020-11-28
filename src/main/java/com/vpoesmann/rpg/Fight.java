@@ -45,7 +45,7 @@ public class Fight {
     }
 
     protected void playerTurn() {
-        for (Warrior character : party.getAliveCharacters()) {
+        for (Character character : party.getAliveCharacters()) {
             displayFightState();
             playerAction(character);
             checkFightEnded();
@@ -58,7 +58,7 @@ public class Fight {
     }
 
     protected void enemyTurn() {
-        for (Warrior enemy : foes.getAliveCharacters()) {
+        for (Character enemy : foes.getAliveCharacters()) {
             displayFightState();
             enemyAction(enemy);
             checkFightEnded();
@@ -70,11 +70,11 @@ public class Fight {
         }
     }
 
-    protected void playerAction(Warrior character) {
+    protected void playerAction(Character character) {
         displayMenuMsg(character.getName());
         int mainAction = pickMainMenuAction();
 
-        Warrior target;
+        Character target;
         switch (mainAction) {
             case 1:
                 // Attack
@@ -115,7 +115,7 @@ public class Fight {
         return result;
     }
 
-    protected Warrior pickTarget() {
+    protected Character pickTarget() {
         Scanner in = new Scanner(System.in);
 
         int result = -1;
@@ -139,17 +139,17 @@ public class Fight {
         }
     }
 
-    private void enemyAction(Warrior enemy) {
+    private void enemyAction(Character enemy) {
         enemy.attack(party.getAliveCharacter(0));
     }
 
     protected void displayFightState() {
         System.out.println("Personnages : \n");
-        for (Warrior character : party.getCharacters()) {
+        for (Character character : party.getCharacters()) {
             System.out.println(character.toString());
         }
         System.out.println("\nEnnemis : \n");
-        for (Warrior enemy : foes.getCharacters()) {
+        for (Character enemy : foes.getCharacters()) {
             System.out.println(enemy.toString());
         }
         System.out.println("");
@@ -162,11 +162,11 @@ public class Fight {
     protected void displayTargetMsg() {
         System.out.println(targetMsg);
         int index = 1;
-        for (Warrior enemy : foes.getAliveCharacters()) {
+        for (Character enemy : foes.getAliveCharacters()) {
             System.out.println(index + "- " + enemy.getName());
             index++;
         }
-        for (Warrior character : party.getAliveCharacters()) {
+        for (Character character : party.getAliveCharacters()) {
             System.out.println(index + "- " + character.getName());
             index++;
         }
