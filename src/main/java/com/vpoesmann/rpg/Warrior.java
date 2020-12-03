@@ -36,7 +36,7 @@ public class Warrior extends Character {
         this.magicStat = LVL1_MAG_STAT;
         this.magicDefStat = LVL1_MDF_STAT;
 
-        this.gainExp(2000000);
+        //this.gainExp(2000000);
     }
 
     @Override
