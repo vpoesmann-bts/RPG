@@ -7,22 +7,22 @@ package com.vpoesmann.rpg;
 
 /**
  *
- * @author sogeking
+ * @author UnSbire
  */
-public class Warrior extends Character {
+public class Priest extends Character {
 
-    protected static final int LVL1_MAX_HP = 100;
-    protected static final int LVL1_MAX_MANA = 20;
+    protected static final int LVL1_MAX_HP = 70;
+    protected static final int LVL1_MAX_MANA = 50;
 
-    protected static final int LVL1_ATK_STAT = 5;
-    protected static final int LVL1_DEF_STAT = 5;
-    protected static final int LVL1_MAG_STAT = 2;
-    protected static final int LVL1_MDF_STAT = 2;
+    protected static final int LVL1_ATK_STAT = 2;
+    protected static final int LVL1_DEF_STAT = 2;
+    protected static final int LVL1_MAG_STAT = 3;
+    protected static final int LVL1_MDF_STAT = 5;
 
-    protected static int[] statsLevelUpMin = {8, 1, 2, 2, 0, 0};
-    protected static int[] statsLevelUpMax = {12, 2, 4, 4, 1, 1};
+    protected static int[] statsLevelUpMin = {5, 5, 1, 1, 2, 2};
+    protected static int[] statsLevelUpMax = {10, 8, 2, 2, 3, 4};
 
-    public Warrior(String p_name) {
+    public Priest(String p_name) {
         super(p_name);
 
         this.maxHPStat = LVL1_MAX_HP;
@@ -36,19 +36,19 @@ public class Warrior extends Character {
         this.magicStat = LVL1_MAG_STAT;
         this.magicDefStat = LVL1_MDF_STAT;
 
-        //this.gainExp(2000000);
+        this.gainExp(200);
     }
 
     @Override
     public void attack(Character enemy) {
-        int actualDefense = enemy.isGuarding() ? enemy.getDefenseStat() * 2 : enemy.getDefenseStat();
-        int damage = (int) (100 * ((double) attackStat / (double) (actualDefense + 100)));
+        int actualDefense = enemy.isGuarding() ? enemy.getMagicDefenseStat() * 2 : enemy.getMagicDefenseStat();
+        int damage = (int) (100 * ((double) magicStat/ (double) (actualDefense + 100)));
         enemy.takeDamage(damage);
     }
 
     @Override
     public String getClassName() {
-        return "Warrior";
+        return "Priest";
     }
 
     @Override
@@ -61,3 +61,4 @@ public class Warrior extends Character {
         return statsLevelUpMax;
     }
 }
+

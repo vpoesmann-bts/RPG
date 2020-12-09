@@ -25,8 +25,8 @@ public class Fight {
     protected static String defeatMsg = "Défaite ! L'équipe a été éradiquée, le monde est condamné à la nuit !";
 
     public Fight() {
-        party = new Party(0);
-        foes = new Party(1);
+        party = new Party(0); //equipe une
+        foes = new Party(1); //equipe deux
 
         ended = false;
         hasPartyWon = false;
