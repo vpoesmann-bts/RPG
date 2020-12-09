@@ -7,7 +7,7 @@ package com.vpoesmann.rpg;
 
 /**
  *
- * @author sogeking
+ * @author UnSbire
  */
 public class Priest extends Character {
 
