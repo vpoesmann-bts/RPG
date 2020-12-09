@@ -71,10 +71,6 @@ public class Priest extends Character {
  */
 package com.vpoesmann.rpg;
 
-/**
- *
- * @author sogeking
- */
 public class Priest extends Character {
 
     protected static final int LVL1_MAX_HP = 70;
