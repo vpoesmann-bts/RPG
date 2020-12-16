@@ -48,7 +48,7 @@ public class Bard extends Character {
     
     @Override
     public String getClassName() {
-        return "Warrior";
+        return "Bard";
     }
     
     @Override
